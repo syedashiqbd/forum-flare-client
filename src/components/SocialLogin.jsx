@@ -3,27 +3,27 @@ import { FaLinkedinIn, FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
-// import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const SocialLogin = () => {
   const { googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-//   const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
 
   const handleGoogleSingIn = () => {
     googleSignIn()
       .then((result) => {
         console.log(result.user);
 
-        // const userInfo = {
-        //   name: result.user?.displayName,
-        //   email: result.user?.email,
-        // };
+        const userInfo = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+        };
 
-        // axiosPublic.post('/users', userInfo).then((res) => {
-        //   console.log(res.data);
-        // });
+        axiosPublic.post('/users', userInfo).then((res) => {
+          console.log(res.data);
+        });
 
         navigate('/');
       })

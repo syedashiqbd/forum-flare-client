@@ -2,10 +2,10 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
-// import Swal from 'sweetalert2';
-// import useAxiosPublic from '../Hooks/useAxiosPublic';
 import { AuthContext } from '../../Providers/AuthProvider';
 import SocialLogin from '../../components/SocialLogin';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
   const {
@@ -19,7 +19,7 @@ const SignUp = () => {
 
   const { createUser, userProfileUpdate } = useContext(AuthContext);
 
-  //   const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
 
   const onSubmit = (data) => {
     // create user
@@ -30,26 +30,26 @@ const SignUp = () => {
       //   profile update
       userProfileUpdate(data.name, data.photo)
         .then(() => {
-          // console.log(result.user);
-          // create user info in database
-          //   const userInfo = {
-          //     name: data.name,
-          //     email: data.email,
-          //   };
-          //   axiosPublic.post('/users', userInfo).then((res) => {
-          //     if (res.data.insertedId) {
-          //       console.log('user added to database', res.data);
-          //       reset();
-          //       Swal.fire({
-          //         position: 'top-end',
-          //         icon: 'success',
-          //         title: `User created successfully`,
-          //         showConfirmButton: false,
-          //         timer: 1500,
-          //       });
-          //       navigate('/');
-          //     }
-          //   });
+          console.log(result.user);
+          //   create user info in database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post('/users', userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log('user added to database', res.data);
+              // reset();
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `User created successfully`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              //   navigate('/');
+            }
+          });
         })
         .catch((error) => console.log(error));
     });
