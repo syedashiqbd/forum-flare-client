@@ -130,9 +130,6 @@ const Navbar = () => {
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
-              <li>
-                <Link to="/profile">Profile</Link>
-              </li>
 
               <li>
                 <p
