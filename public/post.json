@@ -1,7 +1,7 @@
 [
     {
-      "author-name": "Alice",
-      "author-picture": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "authorName": "Alice",
+      "authorPicture": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "title": "Exploring the Wonders of Nature",
       "description": "Nature is truly incredible, and in this post, we delve into the beauty of forests, mountains, and oceans. Witness the breathtaking landscapes that Mother Earth has to offer!",
       "tags": "Nature",
@@ -11,8 +11,8 @@
       "comment": 8
     },
     {
-      "author-name": "Bob",
-      "author-picture": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "authorName": "Bob",
+      "authorPicture": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "title": "The Serenity of a Quiet Forest",
       "description": "Take a virtual journey into a serene forest. Discover the peace and tranquility that nature provides, and learn about the unique flora and fauna thriving in the midst of solitude.",
       "tags": "Nature",
@@ -22,8 +22,8 @@
       "comment": 5
     },  
     {
-          "author-name": "Charlie",
-          "author-picture": "https://plus.unsplash.com/premium_photo-1658527049634-15142565537a?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "Charlie",
+          "authorPicture": "https://plus.unsplash.com/premium_photo-1658527049634-15142565537a?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Adventures in the Wilderness",
           "description": "Embark on thrilling adventures in the untamed wilderness. From challenging treks to eners with wildlife, this post captures the spirit of true outdoor exploration.",
           "tags": "Adventure",
@@ -33,8 +33,8 @@
           "comment": 7
         },
         {
-          "author-name": "Diana",
-          "author-picture": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "Diana",
+          "authorPicture": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Discovering Hidden Gems",
           "description": "Join us in discovering hidden gems around the world. This post unveils lesser-known travel destinations, offering a glimpse into unique cultures and breathtaking landscapes.",
           "tags": "Adventure",
@@ -44,8 +44,8 @@
           "comment": 12
         },
         {
-          "author-name": "Edward",
-          "author-picture": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "Edward",
+          "authorPicture": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Journey Through Time",
           "description": "Embark on a time-traveling adventure, exploring historical sites and ancient civilizations. Uncover the mysteries of the past in this captivating post.",
           "tags": "Travel",
@@ -55,8 +55,8 @@
           "comment": 15
         },
         {
-          "author-name": "Fiona",
-          "author-picture": "https://plus.unsplash.com/premium_photo-1669882305300-38b609862bee?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "Fiona",
+          "authorPicture": "https://plus.unsplash.com/premium_photo-1669882305300-38b609862bee?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Across Continents: A Traveler's Diary",
           "description": "Follow Fiona's journey across continents as she shares tales of diverse cultures, vibrant traditions, and the beauty that lies beyond borders.",
           "tags": "Travel",
@@ -66,8 +66,8 @@
           "comment": 10
         },
         {
-          "author-name": "George",
-          "author-picture": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "George",
+          "authorPicture": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Underwater Wonders",
           "description": "Dive into the depths of the ocean to explore underwater wonders. From vibrant coral reefs to elusive sea creatures, this post unveils the mysteries beneath the waves.",
           "tags": "Exploration",
@@ -77,8 +77,8 @@
           "comment": 9
         },
         {
-          "author-name": "Holly",
-          "author-picture": "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "Holly",
+          "authorPicture": "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Jungle Expedition",
           "description": "Join Holly on a thrilling jungle expedition, navigating through dense forests, enering wildlife, and witnessing the wonders of biodiversity.",
           "tags": "Exploration",
@@ -88,8 +88,8 @@
           "comment": 11
         },
         {
-          "author-name": "Ian",
-          "author-picture": "https://plus.unsplash.com/premium_photo-1664541336816-2a2987114ca4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "Ian",
+          "authorPicture": "https://plus.unsplash.com/premium_photo-1664541336816-2a2987114ca4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Sustainable Travel Tips",
           "description": "Ian shares valuable insights into sustainable travel practices. Learn how to minimize your ecological footprint and contribute to preserving the environment.",
           "tags": "Environment",
@@ -99,8 +99,8 @@
           "comment": 8
         },
         {
-          "author-name": "Jessica",
-          "author-picture": "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "authorName": "Jessica",
+          "authorPicture": "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           "title": "Eco-Friendly Adventures",
           "description": "Embark on eco-friendly adventures with Jessica. Discover destinations that prioritize environmental conservation and provide enriching experiences for mindful travelers.",
           "tags": "Environment",
