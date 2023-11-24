@@ -14,7 +14,7 @@ const PostCard = ({ post }) => {
     comment,
   } = post;
   return (
-    <div className="card w-96 bg-base-100 shadow-xl ">
+    <div className="card min-w-96 bg-base-100 shadow-xl ">
       <figure>
         <img src={authorPicture} className="w-full h-56 object-cover" />
       </figure>

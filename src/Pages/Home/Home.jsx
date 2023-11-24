@@ -7,6 +7,7 @@ import PostCard from '../../components/PostCard';
 
 const Home = () => {
   const [searchPosts, setSearchPosts] = useState([]);
+  const [sortingType, setSortingType] = useState('regular');
 
   const axiosPublic = useAxiosPublic();
 
@@ -38,10 +39,21 @@ const Home = () => {
     },
   });
 
-  const allPosts = searchPosts.length > 0 ? searchPosts : initialPosts;
+  // sorting type condition
+  const allPosts =
+    sortingType === 'popular'
+      ? searchPosts?.popularPost?.length > 0
+        ? searchPosts?.popularPost
+        : initialPosts?.popularPost
+      : searchPosts?.regularPost?.length > 0
+      ? searchPosts?.regularPost
+      : initialPosts?.regularPost;
+
+  const handleSortByPopular = () => {
+    setSortingType(sortingType === 'popular' ? 'regular' : 'popular');
+  };
 
   if (isLoading) return <Loading></Loading>;
-  // console.log(allPosts);
 
   return (
     <div>
@@ -50,15 +62,25 @@ const Home = () => {
       </div>
       <div className="lg:max-w-[1320px] md:max-w-[700px] max-w-[375px] mx-auto">
         {/* it will be from tag collection */}
-        <div className="border mt-5 rounded flex justify-around py-4 flex-wrap">
-          {tags?.map((tag) => (
-            <p className="text-primary font-semibold " key={tag._id}>
-              {tag.tagName}
-            </p>
-          ))}
+        <div className="border  rounded mt-5 grid grid-cols-12">
+          <div className="col-span-1 bg-primary rounded-l text-white p-3 mr-2">
+            <p>All Tags</p>
+          </div>
+          <div className="col-span-11 flex gap-7 items-center ">
+            {tags?.map((tag) => (
+              <p className="text-primary font-semibold " key={tag._id}>
+                {tag.tagName}
+              </p>
+            ))}
+          </div>
         </div>
         {/* Post Section */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 mt-10">
+        <div className="my-8 text-right ">
+          <button onClick={handleSortByPopular} className="btn btn-outline">
+            Sort by {sortingType === 'popular' ? 'Regular' : 'Popular'} Post
+          </button>
+        </div>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 ">
           {allPosts?.map((post) => (
             <PostCard key={post._id} post={post}></PostCard>
           ))}
