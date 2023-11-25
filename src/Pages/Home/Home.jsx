@@ -44,15 +44,7 @@ const Home = () => {
     }
   }, [axiosPublic, page, limit, search]);
 
-  // for tag loading all posts
-  // const { data: tags } = useQuery({
-  //   queryKey: ['tags'],
-  //   queryFn: async () => {
-  //     const res = await axiosPublic.get('/tags');
-  //     return res.data;
-  //   },
-  // });
-
+  // all tags fetching
   const tags = useTags();
 
   // sorting type condition
@@ -72,7 +64,7 @@ const Home = () => {
   const totalPost =
     searchPosts?.length > 0 ? searchPosts?.totalPost : initialPosts?.totalPost;
 
-  console.log(initialPosts, totalPost);
+  // console.log(initialPosts, totalPost);
 
   const totalCount = Math.ceil(totalPost / limit);
 
