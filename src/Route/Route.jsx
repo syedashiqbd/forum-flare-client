@@ -5,6 +5,7 @@ import SignUp from '../Pages/SignUp/SignUp';
 import Login from '../Pages/Login/Login';
 import PostDetails from '../Pages/PostDetails/PostDetails';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {

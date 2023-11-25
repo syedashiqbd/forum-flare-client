@@ -1,5 +1,5 @@
 import { FaComment, FaPen, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import {
   EmailIcon,
   EmailShareButton,
@@ -24,9 +24,13 @@ import {
 } from 'react-share';
 
 import './Demo.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
+import placeholder from '../../assets/user.png';
 
 const PostDetails = () => {
   const post = useLoaderData();
+  const { user } = useContext(AuthContext);
 
   const {
     _id,
@@ -46,6 +50,21 @@ const PostDetails = () => {
   //   const shareUrl = `https://assignment-champs-ashiq.web.app/assignment-details/65483e9276bbc270b11e2c5b`;
 
   const ShareTitle = title;
+
+  const navigate = useNavigate();
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+
+    if (user) {
+      const userComment = e.target.comment.value;
+
+      console.log(userComment);
+      //   e.target.reset();
+    } else {
+      navigate('/login', { state: { from: window.location.pathname } });
+    }
+  };
 
   return (
     <div className="lg:max-w-[1280px] md:max-w-[700px] max-w-[375px] mx-auto">
@@ -191,6 +210,30 @@ const PostDetails = () => {
                 </LineShareButton>
               </div>
             </div>
+            <form
+              onSubmit={handleCommentSubmit}
+              className="flex gap-2 items-start mt-5 "
+            >
+              <div className="w-10 h-10 ">
+                <img
+                  src={user ? user.photoURL : placeholder}
+                  className="rounded-full"
+                />
+              </div>
+              <div className="flex-grow ">
+                <textarea
+                  name="comment"
+                  className="textarea textarea-bordered w-full"
+                  placeholder="Your comment here .."
+                ></textarea>
+              </div>
+
+              <input
+                className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                type="submit"
+                value="Post"
+              />
+            </form>
           </div>
         </div>
       </div>
