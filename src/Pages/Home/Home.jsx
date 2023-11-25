@@ -84,7 +84,7 @@ const Home = () => {
       <div className="bg-red-300">
         <Banner handleSearchTag={handleSearchTag}></Banner>
       </div>
-      <div className="lg:max-w-[1320px] md:max-w-[700px] max-w-[375px] mx-auto">
+      <div className="lg:max-w-[1280px] md:max-w-[700px] max-w-[375px] mx-auto">
         {/* Tag will be load from tag collectionDB */}
         <div className="border  rounded mt-5 grid grid-cols-12">
           <div className="col-span-1 bg-primary rounded-l text-white p-3 mr-2">

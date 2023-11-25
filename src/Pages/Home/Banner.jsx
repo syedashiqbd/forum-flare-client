@@ -7,7 +7,7 @@ const Banner = ({ handleSearchTag }) => {
   };
 
   return (
-    <div className="lg:max-w-[1320px] md:max-w-[700px] max-w-[375px] mx-auto">
+    <div className="lg:max-w-[1280px] md:max-w-[700px] max-w-[375px] mx-auto">
       <div className="flex flex-col items-center justify-center  lg:p-[150px] md:pt-20">
         <h1 className="text-[0B0B0B] lg:text-5xl text-4xl font-bold text-center">
           Unleash Your Voice in Our <br /> Vibrant Forum Community!
