@@ -24,14 +24,13 @@ import {
 } from 'react-share';
 
 import './Demo.css';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import placeholder from '../../assets/user.png';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
 
 const PostDetails = () => {
   const post = useLoaderData();
-  const { user } = useContext(AuthContext);
-
   const {
     _id,
     authorName,
@@ -45,14 +44,38 @@ const PostDetails = () => {
     comment,
   } = post;
 
+  const { user } = useContext(AuthContext);
+
+  const [currentUpvote, setCurrentUpvote] = useState(upvote);
+  const [currentDownvote, setCurrentDownvote] = useState(downvote);
+
+  const axiosPublic = useAxiosPublic();
+
+  const handleUpvote = async () => {
+    try {
+      const response = await axiosPublic.patch(`/upvote/${_id}`);
+      setCurrentUpvote(response.data.upvote);
+    } catch (error) {
+      console.error('Error upvoting:', error);
+    }
+  };
+
+  const handleDownvote = async () => {
+    try {
+      const response = await axiosPublic.patch(`/downvote/${_id}`);
+      setCurrentDownvote(response.data.downvote);
+    } catch (error) {
+      console.error('Error downvoting:', error);
+    }
+  };
+
   const shareUrl = `https://forum-flare.web.app/postDetails/${_id}`;
-
   //   const shareUrl = `https://assignment-champs-ashiq.web.app/assignment-details/65483e9276bbc270b11e2c5b`;
-
   const ShareTitle = title;
 
   const navigate = useNavigate();
 
+  // for comment push to database
   const handleCommentSubmit = (e) => {
     e.preventDefault();
 
@@ -90,14 +113,20 @@ const PostDetails = () => {
                 {comment}
               </p>
               <div className="flex gap-3">
-                <div className="badge badge-outline px-5 py-3 ">
+                <button
+                  onClick={handleUpvote}
+                  className="badge badge-outline px-5 py-3"
+                >
                   <FaThumbsUp className="mr-2 text-primary"></FaThumbsUp>
-                  {upvote}
-                </div>
-                <div className="badge badge-outline px-5 py-3 ">
+                  {currentUpvote}
+                </button>
+                <button
+                  onClick={handleDownvote}
+                  className="badge badge-outline px-5 py-3"
+                >
                   <FaThumbsDown className="mr-2 text-rose-600"></FaThumbsDown>
-                  {downvote}
-                </div>
+                  {currentDownvote}
+                </button>
               </div>
             </div>
             {/* Share button */}
