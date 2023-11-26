@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = () => {
   const [error, setError] = useState('');
@@ -13,12 +14,13 @@ const CheckoutForm = () => {
   const axiosSecure = useAxiosSecure();
   const totalPrice = 125;
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosSecure
       .post('/create-payment-intent', { price: totalPrice })
       .then((res) => {
-        console.log(res.data.clientSecret);
+        // console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
   }, [axiosSecure, totalPrice]);
@@ -43,7 +45,7 @@ const CheckoutForm = () => {
       console.log('payment error', error);
       setError(error.message);
     } else {
-      console.log('payment method', paymentMethod);
+      //   console.log('payment method', paymentMethod);
       setError('');
     }
 
@@ -61,18 +63,24 @@ const CheckoutForm = () => {
     if (confirmError) {
       console.log('confirm error', confirmError);
     } else {
-      console.log('payment intent', paymentIntent);
+      //   console.log('payment intent', paymentIntent);
       if (paymentIntent.status === 'succeeded') {
         setTransactionId(paymentIntent.id);
+
+        // to setup badge:bronze to gold in user collection
+        axiosSecure.patch(`/users/${user?.email}`).then((res) => {
+          console.log(res.data);
+        });
+
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: `Payment made successfully`,
+          title: `Payment made & you become Gold member successfully`,
           showConfirmButton: false,
           timer: 1000,
         });
-        //now save the payment info to the database
-        
+        navigate('/membership');
+        //later save the payment info to the database if needed
       }
     }
   };

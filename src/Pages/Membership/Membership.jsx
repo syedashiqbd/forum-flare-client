@@ -11,11 +11,11 @@ const Membership = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users/${user.email}`);
+      const res = await axiosSecure.get(`/users/${user?.email}`);
       return res.data;
     },
   });
-  console.log(users.badge);
+  console.log(users.email);
 
   return (
     <div className="lg:max-w-[1280px] md:max-w-[700px] max-w-[375px] mx-auto  mt-10 mb-20">
