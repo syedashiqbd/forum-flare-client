@@ -40,6 +40,16 @@ const Navbar = () => {
       >
         Membership
       </NavLink>
+      <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          isActive
+            ? 'bg-[#5F2DED] text-white lg:py-1.5 lg:px-3 px-5 py-1 text-sm lg:text-base rounded  '
+            : 'active text-[#F2277E] font-bold '
+        }
+      >
+        Dashboard
+      </NavLink>
 
       {/* {user && (
           <>

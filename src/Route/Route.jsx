@@ -8,6 +8,10 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 import PrivateRoute from './PrivateRoute';
 import Membership from '../Pages/Membership/Membership';
 import Payment from '../Pages/Payment/Payment';
+import Dashboard from '../Layout/Dashboard';
+import MyProfile from '../Pages/Dashboard/MyProfile/MyProfile';
+import AddPost from '../Pages/Dashboard/AddPost/AddPost';
+import MyPost from '../Pages/Dashboard/MyPost/MyPost';
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +60,28 @@ export const router = createBrowserRouter([
             <Membership></Membership>
           </PrivateRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: 'dashboard',
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: 'myProfile',
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: 'addPost',
+        element: <AddPost></AddPost>,
+      },
+      {
+        path: 'myPost',
+        element: <MyPost></MyPost>,
       },
     ],
   },

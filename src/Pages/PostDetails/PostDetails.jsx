@@ -243,10 +243,10 @@ const PostDetails = () => {
               onSubmit={handleCommentSubmit}
               className="flex gap-2 items-start mt-5 "
             >
-              <div className="w-10 h-10 ">
+              <div className="w-10 h-10  ">
                 <img
                   src={user ? user.photoURL : placeholder}
-                  className="rounded-full"
+                  className="rounded-full object-cover"
                 />
               </div>
               <div className="flex-grow ">

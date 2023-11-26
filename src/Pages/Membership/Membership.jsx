@@ -8,14 +8,14 @@ import { AuthContext } from '../../Providers/AuthProvider';
 const Membership = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery({
+  const { data: users = [],  } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users/${user?.email}`);
       return res.data;
     },
   });
-  console.log(users.email);
+//   console.log(users.email);
 
   return (
     <div className="lg:max-w-[1280px] md:max-w-[700px] max-w-[375px] mx-auto  mt-10 mb-20">
