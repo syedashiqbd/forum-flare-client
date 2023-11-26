@@ -1,7 +1,22 @@
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const Membership = () => {
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user.email}`);
+      return res.data;
+    },
+  });
+  console.log(users.badge);
+
   return (
     <div className="lg:max-w-[1280px] md:max-w-[700px] max-w-[375px] mx-auto  mt-10 mb-20">
       <div>
@@ -56,9 +71,15 @@ const Membership = () => {
               <h1 className="text-3xl font-bold">
                 $<span className="text-success text-6xl">125</span>
               </h1>
-              <Link to="/payment">
-                <button className="btn btn-primary  rounded">Pay Now</button>
-              </Link>
+              {users?.badge === 'bronze' ? (
+                <Link to="/payment">
+                  <button className="btn btn-primary  rounded">Pay Now</button>
+                </Link>
+              ) : (
+                <button className="btn btn-success text-white  rounded">
+                  You Already <br /> Gold Member
+                </button>
+              )}
             </div>
           </div>
         </div>

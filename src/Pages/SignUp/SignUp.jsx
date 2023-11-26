@@ -35,6 +35,7 @@ const SignUp = () => {
           const userInfo = {
             name: data.name,
             email: data.email,
+            badge: 'bronze',
           };
           axiosPublic.post('/users', userInfo).then((res) => {
             if (res.data.insertedId) {
@@ -47,7 +48,7 @@ const SignUp = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              //   navigate('/');
+              navigate('/');
             }
           });
         })

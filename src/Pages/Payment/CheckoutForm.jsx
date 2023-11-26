@@ -71,6 +71,8 @@ const CheckoutForm = () => {
           showConfirmButton: false,
           timer: 1000,
         });
+        //now save the payment info to the database
+        
       }
     }
   };
