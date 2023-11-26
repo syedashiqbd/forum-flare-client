@@ -7,6 +7,7 @@ import PostDetails from '../Pages/PostDetails/PostDetails';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import PrivateRoute from './PrivateRoute';
 import Membership from '../Pages/Membership/Membership';
+import Payment from '../Pages/Payment/Payment';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
       {
         path: 'signup',
         element: <SignUp></SignUp>,
+      },
+      {
+        path: 'payment',
+        element: <Payment></Payment>,
       },
       {
         path: '/postDetails/:id',
