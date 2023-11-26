@@ -6,6 +6,7 @@ import Login from '../Pages/Login/Login';
 import PostDetails from '../Pages/PostDetails/PostDetails';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import PrivateRoute from './PrivateRoute';
+import Membership from '../Pages/Membership/Membership';
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ export const router = createBrowserRouter([
             throw error;
           }
         },
+      },
+      {
+        path: 'membership',
+        element: (
+          <PrivateRoute>
+            <Membership></Membership>
+          </PrivateRoute>
+        ),
       },
     ],
   },
