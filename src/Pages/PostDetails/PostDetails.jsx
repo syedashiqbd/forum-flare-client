@@ -36,6 +36,7 @@ const PostDetails = () => {
     _id,
     authorName,
     authorPicture,
+    email,
     title,
     description,
     tags,
@@ -76,21 +77,29 @@ const PostDetails = () => {
 
   const navigate = useNavigate();
 
+  console.log(email);
+
   // for comment push to database
   const handleCommentSubmit = (e) => {
     e.preventDefault();
 
     if (user) {
+      // for checking commenter email and author email
+      if (user.email === email) {
+        toast.error('You should not comment in your post :)');
+        return;
+      }
       const comment = e.target.comment.value;
       const commentItem = {
         comment,
         postId: _id,
+        commenter: user.email,
       };
       axiosPublic.post('/comment', commentItem).then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {
           toast.success('Successfully commented!');
-            e.target.reset();
+          e.target.reset();
         }
       });
     } else {

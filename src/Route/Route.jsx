@@ -12,6 +12,7 @@ import Dashboard from '../Layout/Dashboard';
 import MyProfile from '../Pages/Dashboard/MyProfile/MyProfile';
 import AddPost from '../Pages/Dashboard/AddPost/AddPost';
 import MyPost from '../Pages/Dashboard/MyPost/MyPost';
+import CommentDetails from '../components/CommentDetails';
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +83,19 @@ export const router = createBrowserRouter([
       {
         path: 'myPost',
         element: <MyPost></MyPost>,
+      },
+      {
+        path: 'myPost/comment/:id',
+        element: <CommentDetails></CommentDetails>,
+        loader: async ({ params }) => {
+          try {
+            const response = await useAxiosSecure().get(`comment/${params.id}`);
+            return response.data;
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+          }
+        },
       },
     ],
   },

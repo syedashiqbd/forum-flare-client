@@ -1,4 +1,4 @@
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaComment, FaTrashAlt } from 'react-icons/fa';
 import { UserDetails } from '../../../components/UserDetails';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -36,7 +36,9 @@ const MyPost = () => {
       }
     });
   };
-  
+
+  console.log(userPost);
+
   return (
     <div className="w-11/12 mx-auto ">
       <h2 className="text-3xl font-semibold uppercase">
@@ -75,9 +77,6 @@ rounded-t-lg"
                 <td>
                   <div>{post.downvote}</div>
                 </td>
-                <td>
-                  <div className="font-bold">{post.email}</div>
-                </td>
 
                 {/* <td className="text-center">
                   {user?.role === 'admin' ? (
@@ -92,9 +91,22 @@ rounded-t-lg"
                   )}
                 </td> */}
                 <td className="text-center">
+                  <Link to={`comment/${post._id}`}>
+                    <button className="text-green-500 btn w-36">
+                      Comments 
+                      {/* {''}
+                      {post?.comment ? (
+                        <span className="text-rose-600">({post?.comment})</span>
+                      ) : (
+                        ''
+                      )} */}
+                    </button>
+                  </Link>
+                </td>
+                <td className="text-center">
                   <button
                     onClick={() => handleDelete(post._id)}
-                    className="text-orange-600 text-xl"
+                    className="text-orange-600 text-xl btn"
                   >
                     <FaTrashAlt></FaTrashAlt>
                   </button>
