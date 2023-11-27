@@ -52,7 +52,7 @@ rounded-t-lg"
       >
         <table className="table">
           {/* head */}
-          <thead className="bg-primary text-white  ">
+          <thead className="bg-success text-white  ">
             <tr>
               <th>SL</th>
               <th>Post Title</th>
@@ -93,7 +93,7 @@ rounded-t-lg"
                 <td className="text-center">
                   <Link to={`comment/${post._id}`}>
                     <button className="text-green-500 btn w-36">
-                      Comments 
+                      Comments
                       {/* {''}
                       {post?.comment ? (
                         <span className="text-rose-600">({post?.comment})</span>

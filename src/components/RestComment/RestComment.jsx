@@ -30,7 +30,6 @@ const RestComment = ({ comment }) => {
 
       {/* for modal */}
       <div>
-        {/* <div comment={comment} handleReadMore={handleReadMore}></div> */}
         <CommentModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
