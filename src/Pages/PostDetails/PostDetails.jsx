@@ -103,7 +103,7 @@ const PostDetails = () => {
               <FaPen></FaPen>
             </p>
             <div className="flex">
-              <p className="text-xs">{time}</p>
+              <p className="text-xs">{time.slice(0, 10)}</p>
               <div className="badge badge-secondary">{tags}</div>
             </div>
             <p className="my-5">{description}</p>
