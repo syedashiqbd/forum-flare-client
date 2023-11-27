@@ -28,6 +28,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import placeholder from '../../assets/user.png';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import toast from 'react-hot-toast';
 
 const PostDetails = () => {
   const post = useLoaderData();
@@ -80,10 +81,18 @@ const PostDetails = () => {
     e.preventDefault();
 
     if (user) {
-      const userComment = e.target.comment.value;
-
-      console.log(userComment);
-      //   e.target.reset();
+      const comment = e.target.comment.value;
+      const commentItem = {
+        comment,
+        postId: _id,
+      };
+      axiosPublic.post('/comment', commentItem).then((res) => {
+        // console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success('Successfully commented!');
+            e.target.reset();
+        }
+      });
     } else {
       navigate('/login', { state: { from: window.location.pathname } });
     }
