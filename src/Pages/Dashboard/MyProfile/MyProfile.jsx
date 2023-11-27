@@ -1,21 +1,25 @@
-import { useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
-import { AuthContext } from '../../../Providers/AuthProvider';
+// import { useQuery } from '@tanstack/react-query';
+// import { useContext } from 'react';
+// import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+// import { AuthContext } from '../../../Providers/AuthProvider';
 import PostCard from '../../../components/PostCard';
+import { UserDetails } from '../../../components/UserDetails';
 
 const MyProfile = () => {
-  const { user } = useContext(AuthContext);
-  const axiosSecure = useAxiosSecure();
-  
-  const { data: userDetails = [] } = useQuery({
-    queryKey: ['userDetails'],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/user/${user?.email}`);
-      return res.data;
-    },
-  });
-  const { _id, name, email, badge, userPost } = userDetails;
+  // const { user } = useContext(AuthContext);
+  // const axiosSecure = useAxiosSecure();
+
+  // const { data: userDetails = [] } = useQuery({
+  //   queryKey: ['userDetails'],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/user/${user?.email}`);
+  //     return res.data;
+  //   },
+  // });
+
+  const { user, userDetails } = UserDetails();
+
+  const { email, badge, userPost } = userDetails;
 
   // for latest post finding
   const latestPosts = userPost?.sort(

@@ -1,29 +1,19 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../../Providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
-import { FaPenSquare, FaUtensils } from 'react-icons/fa';
+import { FaPenSquare } from 'react-icons/fa';
 import { useTags } from '../../../components/useTags';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import { UserDetails } from '../../../components/UserDetails';
 
 const AddPost = () => {
-  const { user } = useContext(AuthContext);
+  // user data fetching by email
+  const { user, userDetails, refetch } = UserDetails();
+  const { badge, userPost } = userDetails;
+
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
-
-  const { data: userDetails = [], refetch } = useQuery({
-    queryKey: ['userDetails'],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/user/${user?.email}`);
-      return res.data;
-    },
-  });
-  const { _id, name, email, badge, userPost } = userDetails;
-
-  console.log(userPost?.length);
 
   // all tags fetching
   const tags = useTags();
