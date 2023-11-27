@@ -7,6 +7,7 @@ import PostCard from '../../../components/PostCard';
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
+  
   const { data: userDetails = [] } = useQuery({
     queryKey: ['userDetails'],
     queryFn: async () => {
