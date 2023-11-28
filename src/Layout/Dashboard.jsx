@@ -4,15 +4,15 @@ import {
   FaHome,
   FaList,
   FaPenSquare,
-  FaUser,
   FaUserAlt,
   FaUsers,
 } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
+import useAdmin from '../Hooks/useAdmin';
 
 const Dashboard = () => {
-  //TODO: to be functional
-  const isAdmin = true;
+ 
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="max-w-[1280px] mx-auto">
