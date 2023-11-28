@@ -3,32 +3,38 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../../components/SocialLogin';
 import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const navigate = useNavigate();
   const location = useLocation();
 
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-
-    login(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-      toast.success('Successfully login', {
-        style: {
-          background: '#5F2DED',
-          color: 'white',
-        },
+    login(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success('Successfully login', {
+          style: {
+            background: '#5F2DED',
+            color: 'white',
+          },
+        });
+        navigate(location?.state ? location.state.from : '/');
+      })
+      .catch((error) => {
+        toast.error('Firebase: Error (auth/invalid-login-credentials).', error);
       });
-      navigate(location?.state ? location.state.from : '/');
-    });
   };
 
   return (
@@ -43,17 +49,16 @@ const Login = () => {
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 lg:w-1/2">
-          <form onSubmit={handleSubmit} className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
-                name="email"
+                {...register('email', { required: true })}
                 placeholder="email"
                 className="input input-bordered"
-                required
               />
             </div>
             <div className="form-control">
@@ -62,10 +67,9 @@ const Login = () => {
               </label>
               <input
                 type="password"
-                name="password"
+                {...register('password', { required: true })}
                 placeholder="password"
                 className="input input-bordered"
-                required
               />
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
