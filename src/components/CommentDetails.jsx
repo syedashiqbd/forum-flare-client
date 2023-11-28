@@ -24,29 +24,34 @@ const CommentDetails = () => {
       )
     );
   };
+  //   console.log(feedback);
+  //   console.log(comments);
 
   const handleReportClick = (commentId) => {
     const selectedFeedback = feedback[commentId];
 
     if (!selectedFeedback) {
-      // Handle the case where no feedback is selected
       return;
     }
     axiosSecure
       .patch(`/comments/${commentId}/feedback`, {
         feedback: selectedFeedback,
       })
-      .then((feedbackRes) => {
+      .then((res) => {
         // console.log(feedbackRes.data);
-        if (feedbackRes.data.modifiedCount > 0) {
+        if (res.data.modifiedCount > 0) {
           toast.success('Comment Reported Successfully');
         }
       })
-      .catch((feedbackError) => {
-        console.error('Error updating feedback:', feedbackError);
+      .catch((error) => {
+        console.error('Error updating feedback:', error);
         setReportedComments((prevReported) => [...prevReported, commentId]);
       });
+    //   to be changed later
+    window.location.reload();
   };
+
+  console.log(reportedComments);
 
   return (
     <div className="w-11/12 mx-auto ">
