@@ -10,17 +10,16 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { app } from '../firebase/firebase.config';
-// import useAxiosPublic from '../Hooks/useAxiosPublic';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 export const AuthContext = createContext(null);
-
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
-  //   const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
 
   // create user with google
   const googleSignIn = () => {
@@ -60,18 +59,18 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       console.log('Current User: ', currentUser);
 
-      //   if (currentUser) {
-      //     // TODO: get token and store client
-      //     const userInfo = { email: currentUser.email };
-      //     axiosPublic.post('/jwt', userInfo).then((res) => {
-      //       if (res.data.token) {
-      //         localStorage.setItem('access-token', res.data.token);
-      //       }
-      //     });
-      //   } else {
-      //     // TODO: remove token (if token stored in the client side at local storage, caching, in memory)
-      //     localStorage.removeItem('access-token');
-      //   }
+      // TODO: get token and store client
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post('/jwt', userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem('access-token', res.data.token);
+          }
+        });
+      } else {
+        // TODO: remove token (if token stored in the client side at local storage, caching, in memory)
+        localStorage.removeItem('access-token');
+      }
       setLoading(false);
     });
     return () => {
