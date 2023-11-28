@@ -1,5 +1,5 @@
 import { FaComment, FaPen, FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import {
   EmailIcon,
   EmailShareButton,
@@ -50,10 +50,13 @@ const PostDetails = () => {
 
   const [currentUpvote, setCurrentUpvote] = useState(upvote);
   const [currentDownvote, setCurrentDownvote] = useState(downvote);
-
+  const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
 
   const handleUpvote = async () => {
+    if (!user) {
+      navigate('/login', { state: { from: window.location.pathname } });
+    }
     try {
       const response = await axiosPublic.patch(`/upvote/${_id}`);
       setCurrentUpvote(response.data.upvote);
@@ -63,6 +66,9 @@ const PostDetails = () => {
   };
 
   const handleDownvote = async () => {
+    if (!user) {
+      navigate('/login', { state: { from: window.location.pathname } });
+    }
     try {
       const response = await axiosPublic.patch(`/downvote/${_id}`);
       setCurrentDownvote(response.data.downvote);
@@ -71,13 +77,7 @@ const PostDetails = () => {
     }
   };
 
-  const shareUrl = `https://forum-flare.web.app/postDetails/${_id}`;
-  //   const shareUrl = `https://assignment-champs-ashiq.web.app/assignment-details/65483e9276bbc270b11e2c5b`;
-  const ShareTitle = title;
-
-  const navigate = useNavigate();
-
-  console.log(email);
+  // console.log(email);
 
   // for comment push to database
   const handleCommentSubmit = (e) => {
@@ -103,6 +103,14 @@ const PostDetails = () => {
         }
       });
     } else {
+      navigate('/login', { state: { from: window.location.pathname } });
+    }
+  };
+
+  const shareUrl = `https://forum-flare.web.app/postDetails/${_id}`;
+
+  const handleShare = () => {
+    if (!user) {
       navigate('/login', { state: { from: window.location.pathname } });
     }
   };
@@ -147,116 +155,119 @@ const PostDetails = () => {
                 </button>
               </div>
             </div>
+
             {/* Share button */}
-            <div className="Demo__container mt-5 ">
+            <div className="Demo__container mt-5 mx-auto">
               <div className="Demo__some-network">
-                <FacebookShareButton
-                  url={shareUrl}
-                  className="Demo__some-network__share-button"
-                >
-                  <FacebookIcon size={32} round />
-                </FacebookShareButton>
-
-                <div>
-                  <FacebookShareCount
-                    url={shareUrl}
-                    className="Demo__some-network__share-count"
-                  >
-                    {(count) => count}
-                  </FacebookShareCount>
-                </div>
-              </div>
-
-              <div className="Demo__some-network">
-                <FacebookMessengerShareButton
-                  url={shareUrl}
-                  appId="521270401588372"
-                  className="Demo__some-network__share-button"
-                >
-                  <FacebookMessengerIcon size={32} round />
-                </FacebookMessengerShareButton>
-              </div>
-
-              <div className="Demo__some-network">
-                <TwitterShareButton
-                  url={shareUrl}
-                  title={ShareTitle}
-                  className="Demo__some-network__share-button"
-                >
-                  <XIcon size={32} round />
-                </TwitterShareButton>
-              </div>
-
-              <div className="Demo__some-network">
-                <TelegramShareButton
-                  url={shareUrl}
-                  title={ShareTitle}
-                  className="Demo__some-network__share-button"
-                >
-                  <TelegramIcon size={32} round />
-                </TelegramShareButton>
-              </div>
-
-              <div className="Demo__some-network">
-                <WhatsappShareButton
-                  url={shareUrl}
-                  title={ShareTitle}
-                  separator=":: "
-                  className="Demo__some-network__share-button"
-                >
-                  <WhatsappIcon size={32} round />
-                </WhatsappShareButton>
-              </div>
-
-              <div className="Demo__some-network">
-                <LinkedinShareButton
-                  url={shareUrl}
-                  className="Demo__some-network__share-button"
-                >
-                  <LinkedinIcon size={32} round />
-                </LinkedinShareButton>
-              </div>
-
-              <div className="Demo__some-network">
-                <RedditShareButton
-                  url={shareUrl}
-                  title={ShareTitle}
-                  windowWidth={660}
-                  windowHeight={460}
-                  className="Demo__some-network__share-button"
-                >
-                  <RedditIcon size={32} round />
-                </RedditShareButton>
-
-                <div>
-                  <RedditShareCount
-                    url={shareUrl}
-                    className="Demo__some-network__share-count"
+                {!user ? (
+                  <FacebookIcon
+                    onClick={handleShare}
+                    size={32}
+                    round
+                    className="Demo__some-network__share-button"
                   />
-                </div>
+                ) : (
+                  <FacebookShareButton
+                    url={shareUrl}
+                    className="Demo__some-network__share-button"
+                  >
+                    <FacebookIcon size={32} round></FacebookIcon>
+                  </FacebookShareButton>
+                )}
               </div>
 
               <div className="Demo__some-network">
-                <EmailShareButton
-                  url={shareUrl}
-                  subject={ShareTitle}
-                  body="body"
-                  className="Demo__some-network__share-button"
-                >
-                  <EmailIcon size={32} round />
-                </EmailShareButton>
+                {!user ? (
+                  <FacebookMessengerIcon
+                    onClick={handleShare}
+                    size={32}
+                    round
+                    className="Demo__some-network__share-button"
+                  />
+                ) : (
+                  <FacebookMessengerShareButton
+                    url={shareUrl}
+                    className="Demo__some-network__share-button"
+                  >
+                    <FacebookMessengerIcon
+                      size={32}
+                      round
+                    ></FacebookMessengerIcon>
+                  </FacebookMessengerShareButton>
+                )}
               </div>
 
               <div className="Demo__some-network">
-                <LineShareButton
-                  url={shareUrl}
-                  title={ShareTitle}
-                  className="Demo__some-network__share-button"
-                >
-                  <LineIcon size={32} round />
-                </LineShareButton>
+                {!user ? (
+                  <XIcon
+                    onClick={handleShare}
+                    size={32}
+                    round
+                    className="Demo__some-network__share-button"
+                  />
+                ) : (
+                  <TwitterShareButton
+                    url={shareUrl}
+                    className="Demo__some-network__share-button"
+                  >
+                    <XIcon size={32} round></XIcon>
+                  </TwitterShareButton>
+                )}
+              </div>
+              <div className="Demo__some-network">
+                {!user ? (
+                  <WhatsappIcon
+                    onClick={handleShare}
+                    size={32}
+                    round
+                    className="Demo__some-network__share-button"
+                  />
+                ) : (
+                  <WhatsappShareButton
+                    url={shareUrl}
+                    className="Demo__some-network__share-button"
+                  >
+                    <WhatsappIcon size={32} round></WhatsappIcon>
+                  </WhatsappShareButton>
+                )}
+              </div>
+              <div className="Demo__some-network">
+                {!user ? (
+                  <LinkedinIcon
+                    onClick={handleShare}
+                    size={32}
+                    round
+                    className="Demo__some-network__share-button"
+                  />
+                ) : (
+                  <LinkedinShareButton
+                    url={shareUrl}
+                    className="Demo__some-network__share-button"
+                  >
+                    <LinkedinIcon size={32} round></LinkedinIcon>
+                  </LinkedinShareButton>
+                )}
+              </div>
+              <div className="Demo__some-network">
+                {!user ? (
+                  <EmailIcon
+                    onClick={handleShare}
+                    size={32}
+                    round
+                    className="Demo__some-network__share-button"
+                  />
+                ) : (
+                  <EmailShareButton
+                    url={shareUrl}
+                    className="Demo__some-network__share-button"
+                  >
+                    <EmailIcon size={32} round></EmailIcon>
+                  </EmailShareButton>
+                )}
               </div>
             </div>
+
+            {/* comment box */}
             <form
               onSubmit={handleCommentSubmit}
               className="flex gap-2 items-start mt-5 "

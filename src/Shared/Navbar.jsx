@@ -4,9 +4,20 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../Providers/AuthProvider';
 import toast from 'react-hot-toast';
 import userDefaultPic from '../assets/user.png';
+import { FaBullhorn } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+  const { data: announcement } = useQuery({
+    queryKey: ['announcement'],
+    queryFn: async () => {
+      const res = await axiosPublic.get('/announcement');
+      return res.data;
+    },
+  });
 
   const handleLogOut = () => {
     logout();
@@ -50,35 +61,10 @@ const Navbar = () => {
       >
         Dashboard
       </NavLink>
-
-      {/* {user && (
-          <>
-            <NavLink
-              to="/profile"
-              className={({ isActive, isPending }) =>
-                isPending
-                  ? 'pending'
-                  : isActive
-                  ? 'bg-[#5F2DED] text-white lg:py-1.5 lg:px-3 px-5 py-1 text-sm lg:text-base rounded  '
-                  : 'active text-[#F2277E] font-bold '
-              }
-            >
-              Profile
-            </NavLink>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive, isPending }) =>
-                isPending
-                  ? 'pending'
-                  : isActive
-                  ? 'bg-[#5F2DED] text-white lg:py-1.5 lg:px-3 px-5 py-1 text-sm lg:text-base rounded  '
-                  : 'active text-[#F2277E] font-bold '
-              }
-            >
-              Dashboard
-            </NavLink>
-          </>
-        )} */}
+      <div className="mr-5 flex items-center justify-center gap-2 bg-gray-200 p-2.5 rounded text-white">
+        <FaBullhorn className="text-black"></FaBullhorn>
+        <div className="badge badge-secondary">{announcement?.length}</div>
+      </div>
     </>
   );
 

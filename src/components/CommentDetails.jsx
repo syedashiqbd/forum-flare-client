@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 
 const CommentDetails = () => {
   const prevComments = useLoaderData();
+  console.log(prevComments);
 
   const [comments, setComments] = useState(prevComments);
   const [reportedComments, setReportedComments] = useState([]);
@@ -24,8 +25,6 @@ const CommentDetails = () => {
       )
     );
   };
-  //   console.log(feedback);
-  //   console.log(comments);
 
   const handleReportClick = (commentId) => {
     const selectedFeedback = feedback[commentId];
@@ -50,8 +49,6 @@ const CommentDetails = () => {
     //   to be changed later
     window.location.reload();
   };
-
-  console.log(reportedComments);
 
   return (
     <div className="w-11/12 mx-auto ">

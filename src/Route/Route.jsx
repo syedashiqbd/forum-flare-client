@@ -4,7 +4,6 @@ import Home from '../Pages/Home/Home';
 import SignUp from '../Pages/SignUp/SignUp';
 import Login from '../Pages/Login/Login';
 import PostDetails from '../Pages/PostDetails/PostDetails';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import PrivateRoute from './PrivateRoute';
 import Membership from '../Pages/Membership/Membership';
 import Payment from '../Pages/Payment/Payment';
@@ -15,6 +14,7 @@ import MyPost from '../Pages/Dashboard/MyPost/MyPost';
 import CommentDetails from '../components/CommentDetails';
 import ManageUsers from '../Pages/Dashboard/ManageUsers/ManageUsers';
 import AdminRoute from './AdminRoute';
+import Announcement from '../Pages/Dashboard/Announcement/Announcement';
 
 export const router = createBrowserRouter([
   {
@@ -44,17 +44,8 @@ export const router = createBrowserRouter([
       {
         path: '/postDetails/:id',
         element: <PostDetails></PostDetails>,
-        loader: async ({ params }) => {
-          try {
-            const response = await useAxiosSecure().get(
-              `/postDetails/${params.id}`
-            );
-            return response.data;
-          } catch (error) {
-            console.error('Error fetching data:', error);
-            throw error;
-          }
-        },
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/postDetails/${params.id}`),
       },
       {
         path: 'membership',
@@ -74,7 +65,6 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      
       // normal user route
       {
         path: 'myProfile',
@@ -91,15 +81,8 @@ export const router = createBrowserRouter([
       {
         path: 'myPost/comment/:id',
         element: <CommentDetails></CommentDetails>,
-        loader: async ({ params }) => {
-          try {
-            const response = await useAxiosSecure().get(`comment/${params.id}`);
-            return response.data;
-          } catch (error) {
-            console.error('Error fetching data:', error);
-            throw error;
-          }
-        },
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/comment/${params.id}`),
       },
 
       //admin route
@@ -108,6 +91,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: 'announcement',
+        element: (
+          <AdminRoute>
+            <Announcement></Announcement>
           </AdminRoute>
         ),
       },

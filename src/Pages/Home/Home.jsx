@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import Loading from '../../components/Loading';
 import PostCard from '../../components/PostCard';
 import { useTags } from '../../components/useTags';
+import AnouncementCard from '../../components/AnouncementCard';
 
 const Home = () => {
   const [search, setSearch] = useState('');
@@ -21,6 +22,16 @@ const Home = () => {
     queryKey: ['posts', page, limit],
     queryFn: async () => {
       const res = await axiosPublic.get(`/posts?page=${page}&limit=${limit}`);
+      return res.data;
+    },
+  });
+
+  // for loading announcement
+
+  const { data: announcement } = useQuery({
+    queryKey: ['announcement'],
+    queryFn: async () => {
+      const res = await axiosPublic.get('/announcement');
       return res.data;
     },
   });
@@ -97,6 +108,15 @@ const Home = () => {
               </p>
             ))}
           </div>
+        </div>
+
+        <div className="flex gap-5 justify-center items-center flex-wrap mt-10">
+          {announcement?.map((item) => (
+            <AnouncementCard
+              key={item._id}
+              announcement={item}
+            ></AnouncementCard>
+          ))}
         </div>
 
         <div className="my-8 text-right ">
