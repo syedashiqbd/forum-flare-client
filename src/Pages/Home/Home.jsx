@@ -27,7 +27,7 @@ const Home = () => {
   });
 
   // for loading announcement
-  const { data: announcement } = useQuery({
+  const { data: announcement = [] } = useQuery({
     queryKey: ['announcement'],
     queryFn: async () => {
       const res = await axiosPublic.get('/announcement');
@@ -91,16 +91,16 @@ const Home = () => {
 
   return (
     <div>
-      <div className="bg-red-300">
+      <div className="bg-[url('/img/hero-pattern.svg')] -mt-32 ">
         <Banner handleSearchTag={handleSearchTag}></Banner>
       </div>
       <div className="lg:max-w-[1280px] md:max-w-[700px] max-w-[375px] mx-auto">
-        {/* Tag will be load from tag collectionDB */}
-        <div className="border  rounded mt-5 grid grid-cols-12">
-          <div className="col-span-1 bg-primary rounded-l text-white p-3 mr-2">
+        {/* Tag collection */}
+        <div className="border  rounded mt-10 grid grid-cols-12">
+          <div className="lg:col-span-1 col-span-3 bg-primary rounded-l text-white lg:p-3 mr-2 flex items-center justify-center">
             <p>All Tags</p>
           </div>
-          <div className="col-span-11 flex gap-7 items-center ">
+          <div className="lg:col-span-11 col-span-9 flex lg:gap-7 gap-3 flex-wrap items-center ">
             {tags?.map((tag) => (
               <p className="text-primary font-semibold " key={tag._id}>
                 {tag.tagName}
@@ -109,17 +109,24 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="flex gap-5 justify-center items-center flex-wrap mt-10">
-          {announcement?.map((item) => (
-            <AnouncementCard
-              key={item._id}
-              announcement={item}
-            ></AnouncementCard>
-          ))}
-        </div>
+        {announcement?.length ? (
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-10">
+            {announcement?.map((item) => (
+              <AnouncementCard
+                key={item._id}
+                announcement={item}
+              ></AnouncementCard>
+            ))}
+          </div>
+        ) : (
+          ''
+        )}
 
         <div className="my-8 text-right ">
-          <button onClick={handleSortByPopular} className="btn btn-outline">
+          <button
+            onClick={handleSortByPopular}
+            className="btn btn-sm btn-outline"
+          >
             Sort by {sortingType === 'popular' ? 'Regular' : 'Popular'} Post
           </button>
         </div>

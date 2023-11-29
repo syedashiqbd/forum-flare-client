@@ -117,7 +117,11 @@ rounded-t-lg"
                   </button>
                 </td>
                 <td className="text-error font-bold">
-                  {comment.action ? comment.action : 'Processing'}
+                  {comment.action
+                    ? comment.action
+                    : comment.reported
+                    ? 'Processing'
+                    : ''}
                 </td>
               </tr>
             ))}

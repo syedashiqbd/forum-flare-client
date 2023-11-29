@@ -25,7 +25,7 @@ const ReportedComment = () => {
   });
 
   // for pagination
-  const { data: totalRepComnt } = useQuery({
+  const { data: totalRepComnt = { count: 0 } } = useQuery({
     queryKey: ['totalRepComnt'],
     queryFn: async () => {
       const res = await axiosSecure.get(`/repocomment`);
