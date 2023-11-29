@@ -16,6 +16,7 @@ import ManageUsers from '../Pages/Dashboard/ManageUsers/ManageUsers';
 import AdminRoute from './AdminRoute';
 import Announcement from '../Pages/Dashboard/Announcement/Announcement';
 import ReportedComment from '../Pages/Dashboard/ReportedComment/ReportedComment';
+import AdminProfile from '../Pages/Dashboard/AdminProfile/AdminProfile';
 
 export const router = createBrowserRouter([
   {
@@ -108,6 +109,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ReportedComment></ReportedComment>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: 'adminProfile',
+        element: (
+          <AdminRoute>
+            <AdminProfile />
           </AdminRoute>
         ),
       },

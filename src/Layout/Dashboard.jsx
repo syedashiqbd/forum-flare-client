@@ -7,12 +7,26 @@ import {
   FaUserAlt,
   FaUsers,
 } from 'react-icons/fa';
-import { NavLink, Outlet } from 'react-router-dom';
+import { LuLogOut } from 'react-icons/lu';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
+import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { AuthContext } from '../Providers/AuthProvider';
 
 const Dashboard = () => {
- 
+  const { logout } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
+
+  const handleLogOut = () => {
+    logout();
+    toast.success('Successfully logged-out', {
+      style: {
+        background: '#5F2DED',
+        color: 'white',
+      },
+    });
+  };
 
   return (
     <div className="max-w-[1280px] mx-auto">
@@ -77,12 +91,20 @@ const Dashboard = () => {
 
             {/* shared common */}
             <span className=" divider"></span>
-            <li>
-              <NavLink to="/">
-                <FaHome></FaHome>
-                Home
-              </NavLink>
-            </li>
+            <div className="flex justify-between flex-col h-[calc(100vh-340px)] font-bold ">
+              <li className="flex-grow">
+                <NavLink to="/">
+                  <FaHome></FaHome>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <Link onClick={handleLogOut}>
+                  <LuLogOut></LuLogOut>
+                  Logout
+                </Link>
+              </li>
+            </div>
           </ul>
         </div>
 
