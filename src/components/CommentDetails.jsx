@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 
 const CommentDetails = () => {
   const prevComments = useLoaderData();
-  console.log(prevComments);
 
   const [comments, setComments] = useState(prevComments);
   const [reportedComments, setReportedComments] = useState([]);
@@ -70,6 +69,7 @@ rounded-t-lg"
               <th>Comment</th>
               <th>Feedback</th>
               <th className="text-center">Report</th>
+              <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -105,7 +105,7 @@ rounded-t-lg"
                 </td>
                 <td className="text-center">
                   <button
-                    className="text-orange-600  btn"
+                    className="text-orange-600  btn btn-sm"
                     onClick={() => handleReportClick(comment._id)}
                     disabled={
                       !feedback[comment._id] ||
@@ -115,6 +115,9 @@ rounded-t-lg"
                   >
                     Report
                   </button>
+                </td>
+                <td className="text-error font-bold">
+                  {comment.action ? comment.action : 'Processing'}
                 </td>
               </tr>
             ))}
