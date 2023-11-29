@@ -2,16 +2,49 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { FaChessKing, FaUsers } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
+import Loading from '../../../components/Loading';
+import { useLoaderData } from 'react-router-dom';
 
 const ManageUsers = () => {
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(0);
+
   const axiosSecure = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ['users'],
+  const {
+    data: users,
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ['users', limit, page],
     queryFn: async () => {
-      const res = await axiosSecure.get('/users');
+      const res = await axiosSecure.get(`/users?page=${page}&limit=${limit}`);
       return res.data;
     },
   });
+
+  const { data: totalUser } = useQuery({
+    queryKey: ['totalUser'],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/usercount`);
+      return res.data;
+    },
+  });
+
+  const total = totalUser?.count;
+
+  const totalCount = Math.ceil(total / limit);
+
+  const handlePrevious = () => {
+    if (page > 0) {
+      setPage(page - 1);
+    }
+  };
+  const handleNext = () => {
+    if (page < totalCount - 1) {
+      setPage(page + 1);
+    }
+  };
 
   const handleMakeAdmin = (user) => {
     Swal.fire({
@@ -25,7 +58,7 @@ const ManageUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-        //   console.log(res.data);
+          //   console.log(res.data);
           if (res.data.modifiedCount > 0) {
             refetch();
             Swal.fire({
@@ -42,7 +75,7 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto ">
+    <div className="w-11/12 mx-auto relative ">
       <h2 className="text-3xl font-semibold uppercase">
         Total User : {users?.length}
       </h2>
@@ -98,6 +131,42 @@ rounded-t-lg"
           </tbody>
         </table>
       </div>
+
+      {/* pagination */}
+
+      {isLoading ? (
+        <Loading></Loading>
+      ) : (
+        <div className="join my-6 flex justify-center mt-10">
+          <button
+            onClick={handlePrevious}
+            className="join-item bg-primary btn text-white w-20 hover:bg-[#F2277E]"
+          >
+            Prev
+          </button>
+          {[...Array(totalCount).keys()].map((item, index) => {
+            const pageNumber = index + 1;
+            return (
+              <button
+                key={pageNumber}
+                onClick={() => setPage(item)}
+                className={`join-item btn text-white hover:bg-[#F2277E] w-20 ${
+                  item === page ? 'bg-[#F2277E]' : 'bg-primary'
+                }`}
+              >
+                {pageNumber}
+              </button>
+            );
+          })}
+
+          <button
+            onClick={handleNext}
+            className="join-item bg-primary btn text-white w-20 hover:bg-[#F2277E]"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

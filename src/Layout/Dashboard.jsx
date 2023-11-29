@@ -31,9 +31,9 @@ const Dashboard = () => {
   return (
     <div className="max-w-[1280px] mx-auto">
       {/* <Navbar></Navbar> */}
-      <div className="flex ">
+      <div className="grid grid-cols-12">
         {/* dashboard sidebar */}
-        <div className="w-72 min-h-screen bg-[#F96E46] py-10 px-5">
+        <div className="col-span-3 min-h-screen bg-[#F96E46] py-10 px-5">
           <h1 className="text-center text-white font-bold text-4xl">
             Forum Flare
           </h1>
@@ -109,7 +109,7 @@ const Dashboard = () => {
         </div>
 
         {/* dashboard content */}
-        <div className="flex-1 p-10 ">
+        <div className="col-span-9 mt-10">
           <Outlet></Outlet>
         </div>
       </div>
