@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import { RiArticleFill } from 'react-icons/ri';
 import { FaComment, FaUser } from 'react-icons/fa';
 import { PieChart, Pie, Cell } from 'recharts';
+import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -19,7 +21,28 @@ const AdminProfile = () => {
     },
   });
 
-  console.log(stats);
+  //   console.log(stats);
+
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = async (data) => {
+    const tagData = {
+      tagName: data.tag,
+    };
+    const res = await axiosSecure.post('/tags', tagData);
+    console.log(res.data);
+    if (res.data.insertedId) {
+      // show popup
+      reset();
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `Tag added successfully`,
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
+  };
 
   //   custom shape for pie chart
   const RADIAN = Math.PI / 180;
@@ -49,9 +72,9 @@ const AdminProfile = () => {
   };
 
   const pieChartData = [
-    { name: 'Post', value: stats.posts },
-    { name: 'User', value: stats.users },
-    { name: 'Comment', value: stats.comments },
+    { name: 'Post', value: stats?.posts },
+    { name: 'User', value: stats?.users },
+    { name: 'Comment', value: stats?.comments },
   ];
 
   return (
@@ -105,6 +128,30 @@ const AdminProfile = () => {
           ))}
         </Pie>
       </PieChart>
+      {/* Add tag section */}
+      <div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="card-body w-6/12 mx-auto"
+        >
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Tag name</span>
+            </label>
+            <input
+              {...register('tag', { required: true })}
+              type="text"
+              placeholder="Tag name"
+              className="input input-bordered"
+              required
+            />
+          </div>
+
+          <div className="form-control mt-4 max-w-max mx-auto ">
+            <button className="btn btn-primary text-white ">Add Tag</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
