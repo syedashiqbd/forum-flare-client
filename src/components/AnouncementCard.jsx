@@ -1,6 +1,6 @@
 const AnouncementCard = ({ announcement }) => {
   return (
-    <div className="flex gap-3 p-4 bg-gradient-to-r from-amber-500 to-pink-500 rounded text-white">
+    <div className="flex gap-3 p-4 bg-gradient-to-r from-amber-500 to-pink-500 rounded text-white min-w-[380px]">
       <img
         className="w-20 h-20 object-cover rounded-full"
         src={announcement.image}

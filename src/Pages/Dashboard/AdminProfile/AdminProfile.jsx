@@ -78,7 +78,7 @@ const AdminProfile = () => {
   ];
 
   return (
-    <div className="text-center ">
+    <div className="text-center ml-10 ">
       <div className="relative w-40 mx-auto mt-10">
         <img
           src={user?.photoURL}

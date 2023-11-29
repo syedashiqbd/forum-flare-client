@@ -4,10 +4,9 @@ import { FaChessKing, FaUsers } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { useState } from 'react';
 import Loading from '../../../components/Loading';
-import { useLoaderData } from 'react-router-dom';
 
 const ManageUsers = () => {
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
   const axiosSecure = useAxiosSecure();
@@ -23,6 +22,7 @@ const ManageUsers = () => {
     },
   });
 
+  // for pagination
   const { data: totalUser } = useQuery({
     queryKey: ['totalUser'],
     queryFn: async () => {
