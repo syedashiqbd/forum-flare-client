@@ -91,14 +91,14 @@ const Dashboard = () => {
 
             {/* shared common */}
             <span className=" divider"></span>
-            <div className="flex justify-between flex-col h-[calc(100vh-340px)] font-bold ">
-              <li className="flex-grow">
+            <div className="flex justify-between flex-col  font-bold ">
+              <li>
                 <NavLink to="/">
                   <FaHome></FaHome>
                   Home
                 </NavLink>
               </li>
-              <li>
+              <li className="fixed bottom-0">
                 <Link onClick={handleLogOut}>
                   <LuLogOut></LuLogOut>
                   Logout

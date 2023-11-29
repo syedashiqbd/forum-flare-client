@@ -37,7 +37,7 @@ const AdminProfile = () => {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: `Tag added successfully`,
+        title: `${data.tag} added successfully`,
         showConfirmButton: false,
         timer: 1000,
       });

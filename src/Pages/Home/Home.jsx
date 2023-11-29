@@ -27,7 +27,6 @@ const Home = () => {
   });
 
   // for loading announcement
-
   const { data: announcement } = useQuery({
     queryKey: ['announcement'],
     queryFn: async () => {
