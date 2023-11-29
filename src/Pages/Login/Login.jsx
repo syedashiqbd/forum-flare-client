@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../../components/SocialLogin';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
+import loginImage from '../../assets/login.png';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -38,15 +39,13 @@ const Login = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen ">
       <div className="hero-content flex-col lg:flex-row">
         <div className="text-center lg:w-1/2 lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
+          <h1 className="text-5xl font-bold text-center">Login now!</h1>
+          <div className="py-6">
+            <img src={loginImage} />
+          </div>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 lg:w-1/2">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
