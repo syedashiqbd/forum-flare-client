@@ -11,7 +11,7 @@ const ManageUsers = () => {
 
   const axiosSecure = useAxiosSecure();
   const {
-    data: users,
+    data: users = [],
     refetch,
     isLoading,
   } = useQuery({
@@ -23,13 +23,16 @@ const ManageUsers = () => {
   });
 
   // for pagination
-  const { data: totalUser } = useQuery({
+  const { data: totalUser = { count: 0 } } = useQuery({
     queryKey: ['totalUser'],
     queryFn: async () => {
       const res = await axiosSecure.get(`/usercount`);
       return res.data;
     },
   });
+
+  console.log(users);
+  console.log(totalUser);
 
   const total = totalUser?.count;
 

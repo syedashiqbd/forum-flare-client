@@ -29,14 +29,15 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="max-w-[1280px] mx-auto">
+    <div className=" mx-auto">
       {/* <Navbar></Navbar> */}
       <div className="grid grid-cols-12">
         {/* dashboard sidebar */}
-        <div className="col-span-3 min-h-screen bg-[#F96E46] py-10 px-5">
-          <h1 className="text-center text-white font-bold text-4xl">
-            Forum Flare
-          </h1>
+        <div className=" col-span-3 min-h-screen bg-[#F96E46] py-10 px-10">
+          <img
+            className="lg:w-40 w-16 mx-auto"
+            src="https://i.ibb.co/NYkqWWs/Forum-flare.png"
+          />
           <ul className="menu space-y-2 mt-5 lg:text-base">
             {isAdmin ? (
               <>
@@ -109,7 +110,7 @@ const Dashboard = () => {
         </div>
 
         {/* dashboard content */}
-        <div className="col-span-9 mt-10">
+        <div className=" col-span-9 m-10 w-10/12">
           <Outlet></Outlet>
         </div>
       </div>

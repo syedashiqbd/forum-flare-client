@@ -27,7 +27,7 @@ const MyProfile = () => {
   );
 
   return (
-    <div className="text-center space-y-3">
+    <div className="text-center space-y-3 ml-10">
       <div className="relative w-40 mx-auto mt-10">
         <img
           src={user.photoURL}
