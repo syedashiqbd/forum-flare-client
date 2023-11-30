@@ -47,7 +47,9 @@ export const router = createBrowserRouter([
         path: '/postDetails/:id',
         element: <PostDetails></PostDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/postDetails/${params.id}`),
+          fetch(
+            `https://forum-flare-server.vercel.app/postDetails/${params.id}`
+          ),
       },
       {
         path: 'membership',
@@ -84,7 +86,7 @@ export const router = createBrowserRouter([
         path: 'myPost/comment/:id',
         element: <CommentDetails></CommentDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/comment/${params.id}`),
+          fetch(`https://forum-flare-server.vercel.app/comment/${params.id}`),
       },
 
       //admin route
