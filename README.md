@@ -11,3 +11,9 @@
 - Stripe payment gateway integration
 - JWT applied for security
 - Axios Interceptor is used to secure the frontend and backend.
+
+  # Technology Usage:
+### React
+### Node.js
+### Express.js
+### MongoDB
